@@ -1,7 +1,7 @@
 import java.util.Random
 
 object RPG {
-  val randome = new Random
+  val random = new Random
 
 }
 
@@ -17,7 +17,7 @@ class Hero(_hitPoint: Int, _attackDamage: Int) extends Creature(_hitPoint, _atta
   }
 
   def escape(monster: Monster): Boolean = {
-    val isEscaped = RPG.randome.nextInt(2) == 1
+    val isEscaped = RPG.random.nextInt(2) == 1
     if (!isEscaped)
       this.hitPoint -= monster.attackDamage
     else
