@@ -1,4 +1,7 @@
+import java.util.Random
+
 object RPG {
+  val randome = new Random
 
 }
 
@@ -8,9 +11,19 @@ abstract class Creature(var hitPoint: Int, var attackDamage: Int) {
 
 class Hero(_hitPoint: Int, _attackDamage: Int) extends Creature(_hitPoint, _attackDamage) {
 
-  def attack(monster: Monster): Unit = ???
+  def attack(monster: Monster): Unit = {
+    monster.hitPoint -= this.attackDamage
+    this.hitPoint -= monster.attackDamage
+  }
 
-  def escape(monster: Monster): Boolean = ???
+  def escape(monster: Monster): Boolean = {
+    val isEscaped = RPG.randome.nextInt(2) == 1
+    if (!isEscaped)
+      this.hitPoint -= monster.attackDamage
+    else
+      monster.isAwayFromHero = true
+    isEscaped
+  }
 
   override def toString = s"Hero(体力:${hitPoint}, 攻撃力:${attackDamage})"
 
